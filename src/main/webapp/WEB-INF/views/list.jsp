@@ -105,6 +105,11 @@
     /*}*/
 </style>
 <script>
+    const splitTag = (taste) => {
+        const tags = taste.split(',');
+        console.log(tags);
+        return tags;
+    }
     const showThumbs = (element) => {
         let thumbs = element.querySelector('.thumbsCircle');
         if (thumbs && thumbs.style.display === 'none') {
@@ -131,7 +136,9 @@
                     <div class="restaurantLeft">
                         <div class="restaurantInfo">
                             <span style="font-weight: 600; margin-right: 16px">${restaurant.name}</span>
-                            <div class="restaurantTag">${restaurant.taste}</div>
+                            <c:forEach items="${restaurant.tasteTags}" var="tag">
+                                <div class="restaurantTag">${tag}</div>
+                            </c:forEach>
                             <div class="restaurantTag">${restaurant.price}</div>
                             <c:if test="${restaurant.url != null}">
                                 <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
