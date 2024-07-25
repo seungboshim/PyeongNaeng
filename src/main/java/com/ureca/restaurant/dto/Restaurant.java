@@ -7,6 +7,7 @@ public class Restaurant {
     private int thumbs;
     private String taste;
     private int price;
+    private String url;
 
     public Restaurant() {
     }
@@ -18,6 +19,7 @@ public class Restaurant {
         this.thumbs = thumbs;
         this.taste = taste;
         this.price = price;
+        this.url = url;
     }
 
     public int getId() {
@@ -68,15 +70,11 @@ public class Restaurant {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", thumbs=" + thumbs +
-                ", taste='" + taste + '\'' +
-                ", price=" + price +
-                '}';
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

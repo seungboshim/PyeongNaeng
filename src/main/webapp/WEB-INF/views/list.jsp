@@ -39,6 +39,10 @@
     .restaurantList::-webkit-scrollbar-thumb {
         background-color: #918C76;
     }
+    .restaurantWrapper {
+        display: flex;
+        align-items: center;
+    }
     .restaurant {
         display: flex;
         flex-direction: row;
@@ -52,7 +56,7 @@
         padding: 16px 32px;
         margin: 8px 0;
     }
-    .restaurant:hover {
+    .restaurantWrapper:hover .restaurant {
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
         transition: box-shadow 0.3s;
     }
@@ -77,7 +81,39 @@
         font-weight: 300;
         font-size: 12px;
     }
+    .youtubeLogoWrapper {
+        display: flex;
+        align-items: center;
+        margin-left: 4px;
+    }
+    .restaurantRight {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #FFB800;
+        font-weight: 600;
+    }
+    /*.thumbsCircle {*/
+    /*    padding: 16px;*/
+    /*    visibility: hidden;*/
+    /*    opacity: 0;*/
+    /*    transition: opacity ease-in-out 0.3s, visibility ease-in-out 0.3s;*/
+    /*}*/
+    /*.restaurantWrapper:hover .thumbsCircle {*/
+    /*    opacity: 1;*/
+    /*    visibility: visible;*/
+    /*}*/
 </style>
+<script>
+    const showThumbs = (element) => {
+        let thumbs = element.querySelector('.thumbsCircle');
+        if (thumbs && thumbs.style.display === 'none') {
+            thumbs.style.display = 'flex';
+        } else {
+            thumbs.style.display = 'none';
+        }
+    }
+</script>
 <body>
 <%--index.jsp--%>
 <div class="wrapper">
@@ -90,18 +126,37 @@
     </div>
     <div class="restaurantList">
         <c:forEach items="${list}" var="restaurant">
-            <div class="restaurant">
-                <div class="restaurantLeft">
-                    <div class="restaurantInfo">
-                        <span style="font-weight: 600; margin-right: 16px">${restaurant.name}</span>
-                        <div class="restaurantTag">${restaurant.taste}</div>
-                        <div class="restaurantTag">${restaurant.price}</div>
+            <div class="restaurantWrapper">
+                <div class="restaurant">
+                    <div class="restaurantLeft">
+                        <div class="restaurantInfo">
+                            <span style="font-weight: 600; margin-right: 16px">${restaurant.name}</span>
+                            <div class="restaurantTag">${restaurant.taste}</div>
+                            <div class="restaurantTag">${restaurant.price}</div>
+                            <c:if test="${restaurant.url != null}">
+                                <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
+                                    <img
+                                        src="${pageContext.request.contextPath}/static/youtubeLogo.svg"
+                                        height="24px"
+                                        alt="유튜브 로고"
+                                    >
+                                </a>
+                            </c:if>
+                        </div>
+                        <span>${restaurant.address}</span>
                     </div>
-                    <span>${restaurant.address}</span>
+                    <div class="restaurantRight">
+                        <img
+                            src="${pageContext.request.contextPath}/static/thumbs.svg"
+                            alt="좋아요"
+                            width="24px"
+                        >
+                        <span style="margin-left: 12px">${restaurant.thumbs}</span>
+                    </div>
                 </div>
-                <div class="restaurantRight">
-                    <p>${restaurant.thumbs}</p>
-                </div>
+<%--            <div class="thumbsCircle">--%>
+<%--                <img src="${pageContext.request.contextPath}/static/thumbsCircle.svg" width="48px" />--%>
+<%--            </div>--%>
             </div>
         </c:forEach>
     </div>

@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper
 public interface RestaurantDAO {
     /* 식당 추가 */
-    @Insert("insert into Restaurant (id, name, address, taste, price) values (#{id}, #{name}, #{address}, #{taste}, #{price})")
+    @Insert("insert into Restaurant (id, name, address, taste, price, url) values (#{id}, #{name}, #{address}, #{taste}, #{price}, #{url})")
     public int insert(Restaurant restaurant) throws SQLException;
 
     /* 식당 수정 */
-    @Update("update Restaurant set name=#{name}, address=#{address}, taste=#{taste}, price=#{price} where id=#{id}")
+    @Update("update Restaurant set name=#{name}, address=#{address}, taste=#{taste}, price=#{price}, url=#{url} where id=#{id}")
     public int update(Restaurant restaurant) throws SQLException;
 
     /* 식당 삭제 */
