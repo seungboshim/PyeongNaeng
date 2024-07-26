@@ -29,7 +29,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 800px;
+        width: 700px;
         height: 50%;
         overflow-y: scroll;
         margin: 32px 0;

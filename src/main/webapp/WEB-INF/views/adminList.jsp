@@ -105,6 +105,7 @@
         font-weight: 300;
         font-size: 12px;
         max-width: 100px;
+        min-width: fit-content;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -119,6 +120,7 @@
         font-weight: 300;
         font-size: 12px;
         max-width: 100px;
+        min-width: 40px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -178,7 +180,7 @@
             padding: 8px 16px;
             border-radius: 24px;
             background-color: #FFB800;
-            color: white;
+            color: #2E2E2E;
             cursor: pointer;
         }
     }
