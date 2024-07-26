@@ -54,4 +54,15 @@ public class AdminController {
         }
         return "redirect:list";
     }
+
+    @GetMapping("/remove")
+    public String remove(@RequestParam("id") int id) {
+        try {
+            System.out.println("id = " + id);
+            service.remove(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:list";
+    }
 }

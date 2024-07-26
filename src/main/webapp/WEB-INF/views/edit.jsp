@@ -69,6 +69,19 @@
             transition: border-bottom-color 0.3s;
         }
     }
+    .deleteBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        padding: 8px 16px;
+        border-radius: 24px;
+        background-color: #EC5454;
+        color: white;
+        border: none;
+        margin-right: 16px;
+        cursor: pointer;
+    }
     .submitBtn {
         display: flex;
         justify-content: center;
@@ -79,9 +92,16 @@
         background-color: #2E2E2E;
         color: white;
         border: none;
+        cursor: pointer;
     }
 </style>
 <script>
+    const handleDelete = () => {
+        const isConfirmed = confirm("정말 삭제하시겠어요?");
+        if (isConfirmed) {
+            window.location.href='remove?id=${restaurant.id}';
+        } else return;
+    }
 </script>
 <body>
 <%--index.jsp--%>
@@ -112,7 +132,10 @@
                 <input type="text" name="url" value="${restaurant.url}" placeholder="식당 관련 영상 url을 남겨주세요." />
             </div>
         </div>
-        <input class="submitBtn" type="submit" value="수정완료" />
+        <div style="display: flex">
+            <button class="deleteBtn" type="button" onclick="handleDelete()">삭제하기</button>
+            <button class="submitBtn" type="submit">수정완료</button>
+        </div>
     </form>
 </div>
 </body>
