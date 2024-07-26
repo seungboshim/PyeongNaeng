@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core"  prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,12 +27,11 @@
     .restaurantList {
         display: flex;
         flex-direction: column;
-        align-items: start;
-        width: 700px;
+        align-items: center;
+        width: 800px;
         height: 50%;
-        overflow-x: hidden;
         overflow-y: scroll;
-        margin: 32px 0;
+        margin-top: 80px;
     }
     .restaurantList::-webkit-scrollbar {
         width: 2px;
@@ -44,20 +42,6 @@
     .restaurantWrapper {
         display: flex;
         align-items: center;
-        &:hover .restaurant {
-            width: 440px;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-            transition: width 0.3s, box-shadow 0.3s;
-        }
-        &:hover .restaurantRight {
-            display: none;
-        }
-        &:hover .thumbsCircles {
-            opacity: 1;
-            display: flex;
-            visibility: visible;
-            transition: opacity ease-in-out 0.3s, visibility ease-in-out 0.3s;
-        }
     }
     .restaurant {
         display: flex;
@@ -70,11 +54,11 @@
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
         background-color: #FFFFFF;
         padding: 16px 32px;
-        margin: 8px;
-        transition: width 0.3s;
+        margin: 8px 0;
     }
     .restaurantWrapper:hover .restaurant {
-
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 0.3s;
     }
     .restaurantLeft {
         display: flex;
@@ -109,35 +93,16 @@
         color: #FFB800;
         font-weight: 600;
     }
-    .thumbsCircles {
-        display: flex;
-        visibility: hidden;
-        padding: 16px;
-        opacity: 0;
-    }
-    .thumbCircle {
-        width: 56px;
-        height: 56px;
-        border-radius: 56px;
-        margin-right: 16px;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        &:hover {
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-            transition: box-shadow 0.3s;
-        }
-    }
-    .editCircle {
-        width: 56px;
-        height: 56px;
-        border-radius: 56px;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        &:hover {
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-            transition: box-shadow 0.3s;
-        }
-    }
+    /*.thumbsCircle {*/
+    /*    padding: 16px;*/
+    /*    visibility: hidden;*/
+    /*    opacity: 0;*/
+    /*    transition: opacity ease-in-out 0.3s, visibility ease-in-out 0.3s;*/
+    /*}*/
+    /*.restaurantWrapper:hover .thumbsCircle {*/
+    /*    opacity: 1;*/
+    /*    visibility: visible;*/
+    /*}*/
 </style>
 <script>
     const splitTag = (taste) => {
@@ -155,10 +120,14 @@
     }
 </script>
 <body>
-<%--adminList.jsp--%>
+<%--index.jsp--%>
 <div class="wrapper">
     <div class="header">
-        <p>만족했던 곳이 있나요?</p>
+        <img
+                src="${pageContext.request.contextPath}/static/logo.svg"
+                alt="너가 잘하는 집을 안 가봐서 그래"
+                width="240px"
+        />
     </div>
     <div class="restaurantList">
         <c:forEach items="${list}" var="restaurant">
@@ -170,9 +139,7 @@
                             <c:forEach items="${restaurant.tasteTags}" var="tag">
                                 <div class="restaurantTag">${tag}</div>
                             </c:forEach>
-                            <div class="restaurantTag">
-                                <fmt:formatNumber value="${restaurant.price}" type="currency" currencySymbol=" " maxFractionDigits="0" />원
-                            </div>
+                            <div class="restaurantTag">${restaurant.price}</div>
                             <c:if test="${restaurant.url != null}">
                                 <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
                                     <img
@@ -194,16 +161,9 @@
                         <span style="margin-left: 12px">${restaurant.thumbs}</span>
                     </div>
                 </div>
-                <div class="thumbsCircles">
-                    <div class="thumbCircle">
-                        <img src="${pageContext.request.contextPath}/static/thumbsCircle.svg" width="56px" />
-                    </div>
-                    <div class="editCircle">
-                        <a href="edit?id=${restaurant.id}">
-                            <img src="${pageContext.request.contextPath}/static/editCircle.svg" width="56px" />
-                        </a>
-                    </div>
-                </div>
+                    <%--            <div class="thumbsCircle">--%>
+                    <%--                <img src="${pageContext.request.contextPath}/static/thumbsCircle.svg" width="48px" />--%>
+                    <%--            </div>--%>
             </div>
         </c:forEach>
     </div>
