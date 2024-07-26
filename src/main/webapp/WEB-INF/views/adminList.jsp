@@ -25,12 +25,16 @@
         justify-content: center;
         height: 100%;
     }
+    .header > span {
+        font-weight: 400;
+        font-size: 24px;
+    }
     .restaurantList {
         display: flex;
         flex-direction: column;
         align-items: start;
         width: 700px;
-        height: 50%;
+        height: 60%;
         overflow-x: hidden;
         overflow-y: scroll;
         margin: 32px 0;
@@ -76,6 +80,13 @@
     .restaurantLeft {
         display: flex;
         flex-direction: column;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &>span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
     .restaurantInfo {
         display: flex;
@@ -93,6 +104,23 @@
         color: white;
         font-weight: 300;
         font-size: 12px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .priceTag {
+        width: fit-content;
+        height: fit-content;
+        margin-right: 12px;
+        padding: 4px 8px;
+        border-radius: 24px;
+        background-color: #66845B;
+        color: white;
+        font-weight: 300;
+        font-size: 12px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .youtubeLogoWrapper {
         display: flex;
@@ -186,7 +214,7 @@
                             <c:forEach items="${restaurant.tasteTags}" var="tag">
                                 <div class="restaurantTag">${tag}</div>
                             </c:forEach>
-                            <div class="restaurantTag">
+                            <div class="priceTag">
                                 <fmt:formatNumber value="${restaurant.price}" type="currency" currencySymbol=" " maxFractionDigits="0" />원
                             </div>
                             <c:if test="${restaurant.url != ''}">
@@ -211,7 +239,7 @@
                     </div>
                 </div>
                 <div class="thumbsCircles">
-                    <div class="thumbCircle">
+                    <div class="thumbCircle" onclick="location.href='thumbsup?id=${restaurant.id}'">
                         <img src="${pageContext.request.contextPath}/static/thumbsCircle.svg" width="56px" />
                     </div>
                     <div class="editCircle">

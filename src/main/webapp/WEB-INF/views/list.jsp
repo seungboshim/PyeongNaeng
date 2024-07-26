@@ -32,7 +32,7 @@
         width: 800px;
         height: 50%;
         overflow-y: scroll;
-        margin-top: 80px;
+        margin: 32px 0;
     }
     .restaurantList::-webkit-scrollbar {
         width: 2px;
@@ -64,6 +64,13 @@
     .restaurantLeft {
         display: flex;
         flex-direction: column;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &>span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
     .restaurantInfo {
         display: flex;
@@ -81,6 +88,23 @@
         color: white;
         font-weight: 300;
         font-size: 12px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .priceTag {
+        width: fit-content;
+        height: fit-content;
+        margin-right: 12px;
+        padding: 4px 8px;
+        border-radius: 24px;
+        background-color: #66845B;
+        color: white;
+        font-weight: 300;
+        font-size: 12px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .youtubeLogoWrapper {
         display: flex;
@@ -94,16 +118,21 @@
         color: #FFB800;
         font-weight: 600;
     }
-    /*.thumbsCircle {*/
-    /*    padding: 16px;*/
-    /*    visibility: hidden;*/
-    /*    opacity: 0;*/
-    /*    transition: opacity ease-in-out 0.3s, visibility ease-in-out 0.3s;*/
-    /*}*/
-    /*.restaurantWrapper:hover .thumbsCircle {*/
-    /*    opacity: 1;*/
-    /*    visibility: visible;*/
-    /*}*/
+    .footer {
+        display: flex;
+        align-items: center;
+        & div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 24px;
+            background-color: #FFB800;
+            color: #2E2E2E;
+            cursor: pointer;
+        }
+    }
 </style>
 <script>
     const splitTag = (taste) => {
@@ -140,7 +169,7 @@
                             <c:forEach items="${restaurant.tasteTags}" var="tag">
                                 <div class="restaurantTag">${tag}</div>
                             </c:forEach>
-                            <div class="restaurantTag">
+                            <div class="priceTag">
                                 <fmt:formatNumber value="${restaurant.price}" type="currency" currencySymbol=" " maxFractionDigits="0" />원
                             </div>
                             <c:if test="${restaurant.url != ''}">
@@ -164,11 +193,13 @@
                         <span style="margin-left: 12px">${restaurant.thumbs}</span>
                     </div>
                 </div>
-<%--            <div class="thumbsCircle">--%>
-<%--                <img src="${pageContext.request.contextPath}/static/thumbsCircle.svg" width="48px" />--%>
-<%--            </div>--%>
             </div>
         </c:forEach>
+    </div>
+    <div class="footer">
+        <a href="/admin/list" style="text-decoration: none">
+            <div>저 이제 평냉이 좋아진 것 같아요..</div>
+        </a>
     </div>
 </div>
 </body>

@@ -34,6 +34,16 @@ public class AdminController {
         return "adminList";
     }
 
+    @GetMapping("/thumbsup")
+    public String thumbsUp(@RequestParam("id") int id) {
+        try {
+            service.thumbsUp(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:list";
+    }
+
     @GetMapping("/edit")
     public String edit(@RequestParam("id") int id, Model model) {
         try {
