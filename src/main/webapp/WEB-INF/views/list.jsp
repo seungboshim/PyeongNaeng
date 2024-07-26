@@ -143,7 +143,7 @@
                             <div class="restaurantTag">
                                 <fmt:formatNumber value="${restaurant.price}" type="currency" currencySymbol=" " maxFractionDigits="0" />원
                             </div>
-                            <c:if test="${restaurant.url != null}">
+                            <c:if test="${restaurant.url != ''}">
                                 <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
                                     <img
                                         src="${pageContext.request.contextPath}/static/youtubeLogo.svg"

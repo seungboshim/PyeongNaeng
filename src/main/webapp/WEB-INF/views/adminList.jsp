@@ -73,9 +73,6 @@
         margin: 8px;
         transition: width 0.3s;
     }
-    .restaurantWrapper:hover .restaurant {
-
-    }
     .restaurantLeft {
         display: flex;
         flex-direction: column;
@@ -138,6 +135,25 @@
             transition: box-shadow 0.3s;
         }
     }
+    .footer {
+        display: flex;
+        align-items: center;
+        & span {
+            font-size: 16px;
+            margin-right: 16px;
+        }
+        & div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 24px;
+            background-color: #FFB800;
+            color: white;
+            cursor: pointer;
+        }
+    }
 </style>
 <script>
     const splitTag = (taste) => {
@@ -158,7 +174,7 @@
 <%--adminList.jsp--%>
 <div class="wrapper">
     <div class="header">
-        <p>만족했던 곳이 있나요?</p>
+        <span>평냉 고수인 당신을 만족시킨 곳이 있나요?</span>
     </div>
     <div class="restaurantList">
         <c:forEach items="${list}" var="restaurant">
@@ -173,7 +189,7 @@
                             <div class="restaurantTag">
                                 <fmt:formatNumber value="${restaurant.price}" type="currency" currencySymbol=" " maxFractionDigits="0" />원
                             </div>
-                            <c:if test="${restaurant.url != null}">
+                            <c:if test="${restaurant.url != ''}">
                                 <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
                                     <img
                                             src="${pageContext.request.contextPath}/static/youtubeLogo.svg"
@@ -206,6 +222,12 @@
                 </div>
             </div>
         </c:forEach>
+    </div>
+    <div class="footer">
+        <span>마음에 드는 곳이 없다면..</span>
+        <a href="form" style="text-decoration: none">
+            <div>추가하기</div>
+        </a>
     </div>
 </div>
 </body>

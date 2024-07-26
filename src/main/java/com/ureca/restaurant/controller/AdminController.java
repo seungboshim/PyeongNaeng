@@ -65,4 +65,19 @@ public class AdminController {
         }
         return "redirect:list";
     }
+
+    @GetMapping("/form")
+    public String form() {
+        return "form";
+    }
+
+    @PostMapping("/form")
+    public String add(Restaurant restaurant, Model model) {
+        try {
+            service.add(restaurant);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:list";
+    }
 }

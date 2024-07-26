@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface RestaurantDAO {
     /* 식당 추가 */
-    @Insert("insert into Restaurant (id, name, address, taste, price, url) values (#{id}, #{name}, #{address}, #{taste}, #{price}, #{url})")
+    @Insert("insert into Restaurant (name, address, taste, price, url) values (#{name}, #{address}, #{taste}, #{price}, #{url})")
     public int insert(Restaurant restaurant) throws SQLException;
 
     /* 식당 수정 */

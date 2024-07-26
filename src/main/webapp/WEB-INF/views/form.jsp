@@ -24,149 +24,108 @@
         justify-content: center;
         height: 100%;
     }
-    .restaurantList {
+    .formWrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 800px;
-        height: 50%;
-        overflow-y: scroll;
-        margin-top: 80px;
+        justify-content: center;
     }
-    .restaurantList::-webkit-scrollbar {
-        width: 2px;
-    }
-    .restaurantList::-webkit-scrollbar-thumb {
-        background-color: #918C76;
-    }
-    .restaurantWrapper {
+    .form {
         display: flex;
+        flex-direction: column;
         align-items: center;
-    }
-    .restaurant {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        background-color: #FFFFFF;
         width: 600px;
         height: auto;
-        border-radius: 24px;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-        background-color: #FFFFFF;
-        padding: 16px 32px;
-        margin: 8px 0;
+        padding: 32px;
+        margin: 32px 0;
+        border-radius: 30px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
     }
-    .restaurantWrapper:hover .restaurant {
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-        transition: box-shadow 0.3s;
-    }
-    .restaurantLeft {
-        display: flex;
-        flex-direction: column;
-    }
-    .restaurantInfo {
+    .formInput {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-bottom: 12px;
+        flex: 1;
+        width: 100%;
     }
-    .restaurantTag {
-        width: fit-content;
-        height: fit-content;
-        margin-right: 12px;
-        padding: 4px 8px;
+    .form span {
+        font-weight: 500;
+        margin-right: 32px;
+    }
+    .form input {
+        flex: 1;
+        height: 40px;
+        margin: 8px 0 9px 0;
+        padding: 0 8px;
+        font-size: 16px;
+        border: none;
+        border-bottom: 1px solid #D9D9D9;
+        &:focus {
+            outline: none;
+            border-bottom: 2px solid #2E2E2E;
+            margin-bottom: 8px;
+            transition: border-bottom-color 0.3s;
+        }
+    }
+    .deleteBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        padding: 8px 16px;
+        border-radius: 24px;
+        background-color: #EC5454;
+        color: white;
+        border: none;
+        margin-right: 16px;
+        cursor: pointer;
+    }
+    .submitBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        padding: 8px 16px;
         border-radius: 24px;
         background-color: #2E2E2E;
         color: white;
-        font-weight: 300;
-        font-size: 12px;
+        border: none;
+        cursor: pointer;
     }
-    .youtubeLogoWrapper {
-        display: flex;
-        align-items: center;
-        margin-left: 4px;
-    }
-    .restaurantRight {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: #FFB800;
-        font-weight: 600;
-    }
-    /*.thumbsCircle {*/
-    /*    padding: 16px;*/
-    /*    visibility: hidden;*/
-    /*    opacity: 0;*/
-    /*    transition: opacity ease-in-out 0.3s, visibility ease-in-out 0.3s;*/
-    /*}*/
-    /*.restaurantWrapper:hover .thumbsCircle {*/
-    /*    opacity: 1;*/
-    /*    visibility: visible;*/
-    /*}*/
 </style>
-<script>
-    const splitTag = (taste) => {
-        const tags = taste.split(',');
-        console.log(tags);
-        return tags;
-    }
-    const showThumbs = (element) => {
-        let thumbs = element.querySelector('.thumbsCircle');
-        if (thumbs && thumbs.style.display === 'none') {
-            thumbs.style.display = 'flex';
-        } else {
-            thumbs.style.display = 'none';
-        }
-    }
-</script>
 <body>
 <%--index.jsp--%>
 <div class="wrapper">
     <div class="header">
-        <img
-                src="${pageContext.request.contextPath}/static/logo.svg"
-                alt="너가 잘하는 집을 안 가봐서 그래"
-                width="240px"
-        />
+        <p>평냉을 좋아하는 당신, DB를 건들 자격 있어요</p>
     </div>
-    <div class="restaurantList">
-        <c:forEach items="${list}" var="restaurant">
-            <div class="restaurantWrapper">
-                <div class="restaurant">
-                    <div class="restaurantLeft">
-                        <div class="restaurantInfo">
-                            <span style="font-weight: 600; margin-right: 16px">${restaurant.name}</span>
-                            <c:forEach items="${restaurant.tasteTags}" var="tag">
-                                <div class="restaurantTag">${tag}</div>
-                            </c:forEach>
-                            <div class="restaurantTag">${restaurant.price}</div>
-                            <c:if test="${restaurant.url != null}">
-                                <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
-                                    <img
-                                            src="${pageContext.request.contextPath}/static/youtubeLogo.svg"
-                                            height="24px"
-                                            alt="유튜브 로고"
-                                    >
-                                </a>
-                            </c:if>
-                        </div>
-                        <span>${restaurant.address}</span>
-                    </div>
-                    <div class="restaurantRight">
-                        <img
-                                src="${pageContext.request.contextPath}/static/thumbs.svg"
-                                alt="좋아요"
-                                width="24px"
-                        >
-                        <span style="margin-left: 12px">${restaurant.thumbs}</span>
-                    </div>
-                </div>
-                    <%--            <div class="thumbsCircle">--%>
-                    <%--                <img src="${pageContext.request.contextPath}/static/thumbsCircle.svg" width="48px" />--%>
-                    <%--            </div>--%>
+    <form class="formWrapper" method="post">
+        <div class="form">
+            <div class="formInput">
+                <span>식당 이름</span>
+                <input type="text" name="name" placeholder="식당 이름을 입력해주세요." required />
             </div>
-        </c:forEach>
-    </div>
+            <div class="formInput">
+                <span>식당 주소</span>
+                <input type="text" name="address" placeholder="식당 주소를 입력해주세요." />
+            </div>
+            <div class="formInput">
+                <span>평냉의 맛</span>
+                <input type="text" name="taste" placeholder="평냉의 맛을 쉼표를 구분자로 작성해주세요." />
+            </div>
+            <div class="formInput">
+                <span>평냉 가격</span>
+                <input type="number" name="price" placeholder="평양냉면의 가격을 알려주세요." required />
+            </div>
+            <div class="formInput">
+                <span>평냉 영상</span>
+                <input type="text" name="url" placeholder="식당 관련 영상 url을 남겨주세요." />
+            </div>
+        </div>
+        <button class="submitBtn" type="submit">작성완료</button>
+    </form>
 </div>
 </body>
 </html>
