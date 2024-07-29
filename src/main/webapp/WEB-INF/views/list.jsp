@@ -78,17 +78,29 @@
         align-items: center;
         margin-bottom: 12px;
     }
+    .restaurantTags {
+        display: flex;
+        margin-left: 12px;
+        margin-right: 6px;
+        max-width: 80%;
+        overflow: auto;
+        text-overflow: ellipsis;
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+    }
     .restaurantTag {
         width: fit-content;
         height: fit-content;
-        margin-right: 12px;
+        margin-right: 6px;
         padding: 4px 8px;
         border-radius: 24px;
         background-color: #2E2E2E;
         color: white;
         font-weight: 300;
         font-size: 12px;
-        max-width: 100px;
+        min-width: fit-content;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -102,9 +114,6 @@
         color: white;
         font-weight: 300;
         font-size: 12px;
-        max-width: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
     .youtubeLogoWrapper {
         display: flex;
@@ -165,14 +174,18 @@
                 <div class="restaurant">
                     <div class="restaurantLeft">
                         <div class="restaurantInfo">
-                            <span style="font-weight: 600; margin-right: 16px">${restaurant.name}</span>
-                            <c:forEach items="${restaurant.tasteTags}" var="tag">
-                                <div class="restaurantTag">${tag}</div>
-                            </c:forEach>
+                            <span style="font-weight: 600;">${restaurant.name}</span>
+                                <div class="restaurantTags">
+                                    <c:if test="${restaurant.tasteTags != '' && restaurant.tasteTags != null}">
+                                        <c:forEach items="${restaurant.tasteTags}" var="tag">
+                                            <div class="restaurantTag">${tag}</div>
+                                        </c:forEach>
+                                    </c:if>
+                                </div>
                             <div class="priceTag">
                                 <fmt:formatNumber value="${restaurant.price}" type="currency" currencySymbol=" " maxFractionDigits="0" />원
                             </div>
-                            <c:if test="${restaurant.url != ''}">
+                            <c:if test="${restaurant.url != '' && restaurant.url != null}">
                                 <a class="youtubeLogoWrapper" href="${restaurant.url}" target="_blank">
                                     <img
                                         src="${pageContext.request.contextPath}/static/youtubeLogo.svg"

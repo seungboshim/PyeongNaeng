@@ -125,7 +125,7 @@
             </div>
             <div class="formInput">
                 <span>평냉 가격</span>
-                <input type="number" name="price" value="${restaurant.price}" placeholder="평양냉면의 가격을 알려주세요." required />
+                <input type="number" step=1000 name="price" value="${restaurant.price}" placeholder="평양냉면의 가격을 알려주세요." required />
             </div>
             <div class="formInput">
                 <span>평냉 영상</span>

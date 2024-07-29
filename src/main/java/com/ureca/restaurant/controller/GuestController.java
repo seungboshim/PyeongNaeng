@@ -21,9 +21,11 @@ public class GuestController {
     public String list(Model model) {
         try {
             List<Restaurant> list = service.readAll();
-            list.forEach(item -> item.setTasteTags(
-                item.getTaste().split(",")
-            ));
+            list.forEach(item -> {
+                if (item.getTaste() != null && !item.getTaste().isEmpty()) {
+                    item.setTasteTags(item.getTaste().split(","));
+                }
+            });
             model.addAttribute("list", list);
         } catch (SQLException e) {
             e.printStackTrace();
